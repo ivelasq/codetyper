@@ -1,0 +1,100 @@
+---
+title: Installation
+---
+
+## Quick Install
+
+Install CodeTyper using pip:
+
+```bash
+pip install -e .
+```
+
+This installs codetyper in editable mode from the local directory.
+
+## Requirements
+
+- **Python**: >= 3.8
+- **Dependencies**:
+  - rich >= 13.0.0
+  - PyYAML >= 6.0
+  - typer >= 0.9.0
+
+## Verify Installation
+
+After installation, verify the command is available:
+
+```bash
+codetyper --help
+```
+
+You should see the help message with available commands.
+
+## Optional Dependencies
+
+### For Code Formatting
+
+**Python formatting** (with Ruff):
+```bash
+pip install ruff
+```
+
+**R formatting** (with styler):
+```r
+install.packages("styler")
+```
+
+### For IDE Mode (macOS only)
+
+IDE mode requires:
+- Positron IDE installed at `/Applications/Positron.app` (or custom path)
+- macOS Accessibility permissions for your terminal
+
+See the [IDE Mode guide](ide-mode.qmd) for setup instructions.
+
+## Development Installation
+
+For contributing to CodeTyper:
+
+```bash
+git clone https://github.com/yourusername/codetyper.git
+cd codetyper
+pip install -e .
+```
+
+## Troubleshooting
+
+### Command not found
+
+If `codetyper` command is not found after installation:
+
+1. Check that the package is installed:
+   ```bash
+   pip list | grep codetyper
+   ```
+
+2. Check your Python scripts path is in PATH:
+   ```bash
+   python -m site --user-base
+   ```
+
+3. Try running as a module:
+   ```bash
+   python -m codetyper --help
+   ```
+
+### Permission errors
+
+If you get permission errors during installation:
+
+```bash
+pip install --user -e .
+```
+
+Or use a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -e .
+```

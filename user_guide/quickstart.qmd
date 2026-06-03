@@ -1,0 +1,110 @@
+---
+title: Quick Start
+---
+
+Get started with CodeTyper in 5 minutes.
+
+## 1. Create a Template
+
+Generate a template script for your language:
+
+```bash
+# For Python
+codetyper init python -o my_tutorial.py
+
+# For R
+codetyper init r -o my_tutorial.R
+```
+
+## 2. Edit Your Script
+
+Open the generated file in your editor. It has this structure:
+
+```python
+---
+language: python
+output_file: demo.py
+typing_speed: 0.05
+execute_blocks: true
+---
+
+## Import libraries
+import pandas as pd
+import numpy as np
+
+## Load data | pause_after=1.5
+data = {'x': range(1, 11), 'y': np.random.randn(10)}
+df = pd.DataFrame(data)
+
+## Display results | execute=true, pause_after=2.0
+print(df)
+```
+
+**Key components:**
+
+- **YAML frontmatter** (between `---`): Configuration settings
+- **`##` headers**: Mark code blocks
+- **`|` settings**: Optional per-block configuration
+
+## 3. Test Run
+
+Run your script in terminal mode:
+
+```bash
+codetyper type-code my_tutorial.py
+```
+
+### Keyboard Controls
+
+While typing (terminal mode only):
+
+- **SPACE**: Pause/resume
+- **↑**: Speed up (1.5x → 2x → 3x)
+- **↓**: Slow down (0.75x → 0.5x)
+- **→**: Skip current block
+- **Q or ESC**: Quit
+
+## 4. Record Your Tutorial
+
+1. Open your screen recording software (QuickTime, OBS, etc.)
+2. Start recording
+3. Run: `codetyper type-code my_tutorial.py`
+4. Watch the typing happen!
+
+## IDE Mode
+
+Type directly into Positron IDE:
+
+```bash
+codetyper type-code my_tutorial.py --ide
+```
+
+**Requirements:** macOS with accessibility permissions enabled.
+
+## Common Options
+
+### Faster typing
+```bash
+codetyper type-code my_tutorial.py --speed 0.02
+```
+
+### With formatting
+```bash
+codetyper type-code my_tutorial.py --format
+```
+
+### Custom output location
+```bash
+codetyper type-code my_tutorial.py -o output.py
+```
+
+### No execution (terminal mode)
+```bash
+codetyper type-code my_tutorial.py --no-execute
+```
+
+## Next Steps
+
+- [Script format guide](script-format.qmd) - Learn all configuration options
+- [IDE mode setup](ide-mode.qmd) - Configure Positron integration
+- [Examples](examples.qmd) - See example scripts

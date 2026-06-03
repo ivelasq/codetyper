@@ -1,0 +1,199 @@
+---
+title: Script Format
+---
+
+CodeTyper uses R or Python scripts with YAML frontmatter and markdown headers.
+
+## Basic Structure
+
+```python
+---
+language: python
+output_file: demo.py
+typing_speed: 0.05
+execute_blocks: true
+---
+
+## Block 1
+code here
+
+## Block 2 | execute=false, pause_after=2.0
+more code
+```
+
+## Frontmatter Options
+
+All available configuration options:
+
+```yaml
+---
+# Required
+language: python           # or 'r'
+output_file: demo.py      # Where to save typed code
+
+# Optional
+typing_speed: 0.05        # Seconds per character (default: 0.05)
+execute_blocks: true      # Run code after typing (default: true)
+mode: terminal            # 'terminal' or 'ide' (default: terminal)
+format_output: false      # Format with Ruff/styler (default: false)
+ide_path: /path/to/Positron.app  # Custom Positron path
+---
+```
+
+### Language
+
+**Required.** Specifies the language:
+- `python` - Python code
+- `r` - R code
+
+Can be auto-detected from file extension if omitted.
+
+### Output File
+
+**Required.** Path where the typed code will be saved.
+
+### Typing Speed
+
+Seconds to wait between each character. Default: `0.05`
+
+- Slower: `0.1` (more dramatic)
+- Normal: `0.05` (default)
+- Faster: `0.02` (for quick demos)
+
+Can be overridden with `--speed` flag.
+
+### Execute Blocks
+
+Whether to execute code blocks after typing (terminal mode only).
+
+Default: `true`
+
+Can be disabled with `--no-execute` flag.
+
+### Mode
+
+Typing mode:
+- `terminal` - Type in terminal with syntax highlighting
+- `ide` - Type into Positron IDE
+
+Can be set with `--ide` flag.
+
+### Format Output
+
+Auto-format the output file after typing:
+- Python: Uses Ruff
+- R: Uses styler package
+
+Can be enabled with `--format` flag.
+
+## Code Blocks
+
+Organize code into blocks with `##` headers:
+
+```python
+## Block Name
+code here
+```
+
+### Block Names
+
+The text after `##` becomes the block name:
+
+```python
+## Setup
+## Load data
+## Process and visualize
+```
+
+Block names are displayed during typing but not included in the output file.
+
+## Block Settings
+
+Add settings to blocks with the pipe `|` syntax:
+
+```python
+## Block Name | setting=value, setting2=value2
+```
+
+### Available Settings
+
+**execute** (true/false)
+
+Whether to execute this specific block:
+
+```python
+## Plots | execute=false
+# Skip execution for plot code
+```
+
+**pause_after** (float)
+
+Seconds to pause after typing this block:
+
+```python
+## Important step | pause_after=3.0
+# Pause 3 seconds after typing
+```
+
+### Multiple Settings
+
+Combine settings with commas:
+
+```python
+## Visualization | execute=false, pause_after=2.0
+```
+
+## Complete Example
+
+### Python
+
+```python
+---
+language: python
+output_file: demo.py
+typing_speed: 0.05
+execute_blocks: true
+format_output: true
+---
+
+## Import libraries
+import pandas as pd
+from plotnine import ggplot, aes, geom_line
+
+## Load data | pause_after=1.5
+df = pd.read_csv('data.csv')
+print(f"Loaded {len(df)} rows")
+
+## Create plot | execute=false, pause_after=2.0
+(ggplot(df, aes('x', 'y')) + geom_line())
+```
+
+### R
+
+```r
+---
+language: r
+output_file: demo.R
+typing_speed: 0.05
+execute_blocks: true
+---
+
+## Setup
+library(ggplot2)
+library(dplyr)
+
+## Load and process | pause_after=2.0
+data <- read_csv('data.csv') %>%
+  filter(!is.na(value))
+
+## Visualize | execute=false
+ggplot(data, aes(x, y)) + geom_line()
+```
+
+## Tips
+
+1. **Use descriptive block names** - They help organize your tutorial
+2. **Set execute=false for plots** - Plots may not display well in terminal
+3. **Adjust pause_after** - Give viewers time to read important code
+4. **Test before recording** - Run through once to check timing
+5. **Use formatting** - `format_output: true` for clean output code
