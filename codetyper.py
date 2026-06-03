@@ -117,7 +117,10 @@ class TypewriterEngine:
 
             # Type character
             accumulated += char
-            sys.stdout.write(char)
+            if char == '\n' and self.old_terminal_settings:
+                sys.stdout.write('\r\n')
+            else:
+                sys.stdout.write(char)
             sys.stdout.flush()
 
             # Apply typing delay
@@ -126,7 +129,10 @@ class TypewriterEngine:
         # If we skipped, print the rest
         if self.skip_block and not self.quit:
             remaining = text[len(accumulated):]
-            sys.stdout.write(remaining)
+            if self.old_terminal_settings:
+                sys.stdout.write(remaining.replace('\n', '\r\n'))
+            else:
+                sys.stdout.write(remaining)
             sys.stdout.flush()
             accumulated += remaining
             self.skip_block = False
@@ -509,7 +515,6 @@ class CodeTyperApp:
         self._display_welcome()
         self._display_controls()
 
-        self.engine.setup_terminal()
         self.writer.open()
 
         # Type frontmatter if exists
@@ -586,9 +591,13 @@ class CodeTyperApp:
         if not code.endswith('\n'):
             code += '\n'
 
-        typed = self.engine.type_text(code, self._get_syntax(block))
-        self.writer.write_chunk(typed)
+        self.engine.setup_terminal()
+        try:
+            typed = self.engine.type_text(code, self._get_syntax(block))
+        finally:
+            self.engine.restore_terminal()
 
+        self.writer.write_chunk(typed)
         return typed
 
     def _get_syntax(self, block: CodeBlock) -> str:
