@@ -29,6 +29,9 @@ class Config:
     mode: Literal['terminal', 'ide'] = 'terminal'
     ide_path: Optional[str] = None
     format_output: bool = False
+    record: bool = False
+    record_device: str = "1"
+    record_output: str = "recording.mp4"
 
     def __post_init__(self):
         if self.blocks is None:

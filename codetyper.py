@@ -450,6 +450,7 @@ class CodeTyperApp:
 
     def run(self):
         """Main execution loop."""
+        self._start_recording()
         try:
             if self.config.mode == 'ide':
                 self._run_ide_mode()
@@ -459,6 +460,7 @@ class CodeTyperApp:
             self.engine.restore_terminal()
             if self.writer:
                 self.writer.close()
+            self._stop_recording()
 
     def _run_ide_mode(self):
         """Run in IDE mode - type into Positron."""
@@ -612,6 +614,78 @@ class CodeTyperApp:
             f"Output saved to: {self.config.output_file}",
             border_style="green"
         ))
+
+    def _start_recording(self):
+        self.record_process = None
+        if not self.config.record:
+            return
+
+        import shutil
+        import sys
+        if not shutil.which("ffmpeg"):
+            self.console.print(Panel(
+                "[bold red]FFmpeg is not installed or not in PATH![/bold red]\n\n"
+                "Automatic screen recording requires FFmpeg.\n"
+                "To install it on macOS, run:\n"
+                "  [cyan]brew tap homebrew-ffmpeg/ffmpeg[/cyan]\n"
+                "  [cyan]brew install homebrew-ffmpeg/ffmpeg/ffmpeg[/cyan]",
+                title="Recording Error",
+                border_style="red"
+            ))
+            sys.exit(1)
+
+        cmd = [
+            "ffmpeg",
+            "-f", "avfoundation",
+            "-i", self.config.record_device,
+            "-pix_fmt", "yuv420p",
+            "-r", "30",
+            "-c:v", "h264_videotoolbox",
+            "-q:v", "80",
+            "-y",
+            self.config.record_output
+        ]
+        self.console.print(f"[cyan]Starting screen recording to {self.config.record_output}...[/cyan]")
+        try:
+            self.record_process = subprocess.Popen(
+                cmd,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            time.sleep(1.5)
+            ret = self.record_process.poll()
+            if ret is not None:
+                stderr_text = self.record_process.stderr.read()
+                self.console.print(Panel(
+                    f"[bold red]FFmpeg exited immediately with code {ret}![/bold red]\n\n"
+                    f"[yellow]Error Details:[/yellow]\n{stderr_text.strip()}\n\n"
+                    "[bold]Potential Solutions:[/bold]\n"
+                    "1. [bold]Screen Recording Permission[/bold]: macOS requires permissions for your terminal app to capture the screen.\n"
+                    "   Go to: System Settings → Privacy & Security → Screen Recording and check your terminal app.\n"
+                    "2. [bold]Invalid Device Index[/bold]: Your specified device index may be incorrect.\n"
+                    "   Run: [cyan]ffmpeg -f avfoundation -list_devices true -i \"\"[/cyan] to see your devices.",
+                    title="Recording Failed to Start",
+                    border_style="red"
+                ))
+                sys.exit(1)
+        except Exception as e:
+            self.console.print(f"[red]Failed to start screen recording: {e}[/red]")
+            sys.exit(1)
+
+    def _stop_recording(self):
+        if hasattr(self, 'record_process') and self.record_process:
+            self.console.print("[cyan]Stopping screen recording...[/cyan]")
+            try:
+                self.record_process.communicate(input=b'q', timeout=5)
+            except Exception:
+                try:
+                    self.record_process.terminate()
+                except Exception:
+                    pass
+            self.console.print(f"[green]Screen recording saved to {self.config.record_output}[/green]")
+            self.record_process = None
 
 
 def parse_script_file(script_file: Path) -> Config:
@@ -812,6 +886,9 @@ def type_code(
     ide: bool = typer.Option(False, "--ide", help="Type into Positron IDE instead of terminal"),
     ide_path: Optional[str] = typer.Option(None, "--ide-path", help="Path to Positron.app (default: /Applications/Positron.app)"),
     format_code: bool = typer.Option(False, "--format", help="Format output with Ruff (Python) or styler (R) after typing"),
+    record: bool = typer.Option(False, "--record", help="Enable automatic screen recording with FFmpeg"),
+    record_device: str = typer.Option("1", "--record-device", help="FFmpeg avfoundation video input device index"),
+    record_output: str = typer.Option("recording.mp4", "--record-output", help="Output file for the screen recording"),
 ):
     """
     Type code character-by-character for tutorial recording.
@@ -849,6 +926,12 @@ def type_code(
             config.ide_path = ide_path
         if format_code:
             config.format_output = True
+        if record:
+            config.record = True
+        if record_device:
+            config.record_device = record_device
+        if record_output:
+            config.record_output = record_output
 
         app_instance = CodeTyperApp(config)
         app_instance.run()
