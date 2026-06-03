@@ -1,6 +1,6 @@
 ---
 language: r
-output_file: /Users/isabella.velasquez/typr-test/demo_from_script.R
+output_file: demo_from_script.R
 typing_speed: 0.01
 execute_blocks: true
 ---

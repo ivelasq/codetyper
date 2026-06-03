@@ -26,3 +26,7 @@ Homepage = "https://github.com/ivelasq/codetyper"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+exclude = ["examples"]
+

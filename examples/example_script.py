@@ -1,6 +1,6 @@
 ---
 language: python
-output_file: /Users/isabella.velasquez/typr-test/demo_from_script.py
+output_file: demo_from_script.py
 typing_speed: 0.01
 execute_blocks: true
 format_output: true
