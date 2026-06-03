@@ -88,7 +88,6 @@ class CodeTyperApp:
         self._display_welcome()
         self._display_controls()
 
-        self.engine.setup_terminal()
         self.writer.open()
 
         if self.config.frontmatter:
@@ -159,9 +158,13 @@ class CodeTyperApp:
         if not code.endswith('\n'):
             code += '\n'
 
-        typed = self.engine.type_text(code, self._get_syntax(block))
-        self.writer.write_chunk(typed)
+        self.engine.setup_terminal()
+        try:
+            typed = self.engine.type_text(code, self._get_syntax(block))
+        finally:
+            self.engine.restore_terminal()
 
+        self.writer.write_chunk(typed)
         return typed
 
     def _get_syntax(self, block: CodeBlock) -> str:
