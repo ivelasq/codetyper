@@ -7,13 +7,13 @@
 Users can install directly from your GitHub repository:
 
 ```bash
-pip install git+https://github.com/yourusername/codetyper.git
+pip install git+https://github.com/yourusername/positron-codetyper.git
 ```
 
 Or from a specific branch:
 
 ```bash
-pip install git+https://github.com/yourusername/codetyper.git@main
+pip install git+https://github.com/yourusername/positron-codetyper.git@main
 ```
 
 ### Method 2: Local Distribution
@@ -41,14 +41,14 @@ pip install build
 python -m build
 
 # This creates:
-# - dist/codetyper-0.1.0-py3-none-any.whl
-# - dist/codetyper-0.1.0.tar.gz
+# - dist/positron_codetyper-0.1.0-py3-none-any.whl
+# - dist/positron_codetyper-0.1.0.tar.gz
 ```
 
 Users can install from the wheel:
 
 ```bash
-pip install codetyper-0.1.0-py3-none-any.whl
+pip install positron-codetyper-0.1.0-py3-none-any.whl
 ```
 
 ## Publishing to PyPI (Future)
@@ -79,7 +79,7 @@ python -m build
 twine upload --repository testpypi dist/*
 
 # Test installation
-pip install --index-url https://test.pypi.org/simple/ codetyper
+pip install --index-url https://test.pypi.org/simple/ positron-codetyper
 ```
 
 ### 5. Upload to PyPI
@@ -93,7 +93,7 @@ twine upload dist/*
 Once on PyPI, anyone can install with:
 
 ```bash
-pip install codetyper
+pip install positron-codetyper
 ```
 
 ## Version Management
@@ -102,7 +102,7 @@ Update version in `pyproject.toml`:
 
 ```toml
 [project]
-name = "codetyper"
+name = "positron-codetyper"
 version = "0.2.0"  # Update this
 ```
 
@@ -126,7 +126,7 @@ Update `pyproject.toml` before publishing:
 
 ```toml
 [project]
-name = "codetyper"
+name = "positron-codetyper"
 version = "0.1.0"
 description = "Create realistic typing demonstrations for coding tutorials"
 readme = "README.md"
@@ -149,8 +149,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/codetyper"
-Documentation = "https://github.com/yourusername/codetyper#readme"
-Repository = "https://github.com/yourusername/codetyper"
-"Bug Tracker" = "https://github.com/yourusername/codetyper/issues"
+Homepage = "https://github.com/yourusername/positron-codetyper"
+Documentation = "https://github.com/yourusername/positron-codetyper#readme"
+Repository = "https://github.com/yourusername/positron-codetyper"
+"Bug Tracker" = "https://github.com/yourusername/positron-codetyper/issues"
 ```

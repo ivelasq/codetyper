@@ -7,11 +7,11 @@ import subprocess
 from rich.console import Console
 from rich.panel import Panel
 
-from codetyper.config import Config, CodeBlock
-from codetyper.engine import TypewriterEngine, IDETyper
-from codetyper.executor import CodeExecutor
-from codetyper.formatter import CodeFormatter
-from codetyper.writer import FileWriter
+from positron_codetyper.config import Config, CodeBlock
+from positron_codetyper.engine import TypewriterEngine, IDETyper
+from positron_codetyper.executor import CodeExecutor
+from positron_codetyper.formatter import CodeFormatter
+from positron_codetyper.writer import FileWriter
 
 
 class CodeTyperApp:

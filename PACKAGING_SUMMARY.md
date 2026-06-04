@@ -8,9 +8,9 @@ CodeTyper has been restructured from a single-file script into a proper Python p
 
 ```
 codetyper/
-├── src/codetyper/              # Main package (modular)
+├── src/positron_codetyper/              # Main package (modular)
 │   ├── __init__.py             # Package initialization & exports
-│   ├── __main__.py             # Enables `python -m codetyper`
+│   ├── __main__.py             # Enables `python -m positron_codetyper`
 │   ├── app.py                  # Main application orchestrator
 │   ├── cli.py                  # Command-line interface (Typer)
 │   ├── config.py               # Configuration dataclasses
@@ -35,7 +35,7 @@ codetyper/
 
 Legacy files (can be removed):
 ├── codetyper.py              # Old single-file version
-└── config_schema.py          # Old config (now src/codetyper/config.py)
+└── config_schema.py          # Old config (now src/positron_codetyper/config.py)
 ```
 
 ## Installation
@@ -52,8 +52,8 @@ The `-e` flag installs in editable mode, so code changes take effect immediately
 ### Verify
 
 ```bash
-codetyper --help
-which codetyper
+positron-codetyper --help
+which positron-codetyper
 ```
 
 ## New Command Syntax
@@ -66,11 +66,11 @@ python codetyper.py init python
 
 **After:**
 ```bash
-codetyper type-code my_script.py
-codetyper init python
+positron-codetyper type-code my_script.py
+positron-codetyper init python
 ```
 
-The `codetyper` command is now available globally after installation!
+The `positron-codetyper` command is now available globally after installation!
 
 ## Distribution Options
 
@@ -78,7 +78,7 @@ The `codetyper` command is now available globally after installation!
 
 Users install directly from GitHub:
 ```bash
-pip install git+https://github.com/yourusername/codetyper.git
+pip install git+https://github.com/yourusername/positron-codetyper.git
 ```
 
 ### 2. Local Install
@@ -99,7 +99,7 @@ twine upload dist/*
 
 Then anyone can:
 ```bash
-pip install codetyper
+pip install positron-codetyper
 ```
 
 See [DISTRIBUTION.md](DISTRIBUTION.md) for details.
@@ -108,7 +108,7 @@ See [DISTRIBUTION.md](DISTRIBUTION.md) for details.
 
 1. **Professional packaging**: Standard Python package structure
 2. **Easy installation**: `pip install -e .`
-3. **Clean CLI**: `codetyper` command instead of `python codetyper.py`
+3. **Clean CLI**: `positron-codetyper` command instead of `python codetyper.py`
 4. **Modular code**: Organized into logical components
 5. **Distributable**: Ready to share or publish to PyPI
 6. **Maintainable**: Easier to test and extend
@@ -132,15 +132,15 @@ See [DISTRIBUTION.md](DISTRIBUTION.md) for details.
 
 ## Backwards Compatibility
 
-The old files (`codetyper.py` and `config_schema.py`) are still present and functional, so existing workflows won't break. However, the new `codetyper` command is the recommended way forward.
+The old files (`codetyper.py` and `config_schema.py`) are still present and functional, so existing workflows won't break. However, the new `positron-codetyper` command is the recommended way forward.
 
 ## Next Steps
 
-1. **Test the package**: Try `codetyper type-code examples/example_script.py`
+1. **Test the package**: Try `positron-codetyper type-code examples/example_script.py`
 2. **Remove old files**: Once confident, delete `codetyper.py` and `config_schema.py`
 3. **Publish to GitHub**: Push to a repository
 4. **Share**: Users can install with `pip install git+https://...`
-5. **Future**: Consider publishing to PyPI for `pip install codetyper`
+5. **Future**: Consider publishing to PyPI for `pip install positron-codetyper`
 
 ## Documentation
 
@@ -153,9 +153,9 @@ The old files (`codetyper.py` and `config_schema.py`) are still present and func
 
 Run:
 ```bash
-codetyper --help
-codetyper type-code --help
-codetyper init --help
+positron-codetyper --help
+positron-codetyper type-code --help
+positron-codetyper init --help
 ```
 
 Enjoy your newly packaged CodeTyper! 🎉

@@ -3,8 +3,8 @@
 from pathlib import Path
 import yaml
 
-from codetyper.config import Config, CodeBlock
-from codetyper.exceptions import ConfigurationError
+from positron_codetyper.config import Config, CodeBlock
+from positron_codetyper.exceptions import ConfigurationError
 
 
 def parse_script_file(script_file: Path) -> Config:

@@ -11,7 +11,7 @@ from typing import Optional
 
 from rich.console import Console
 
-from codetyper.exceptions import ExecutionError
+from positron_codetyper.exceptions import ExecutionError
 
 
 class TypewriterEngine:

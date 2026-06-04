@@ -20,7 +20,7 @@ Create realistic typing demonstrations for coding tutorials. Types code characte
 pip install -e .
 ```
 
-This installs codetyper as a command-line tool. After installation, use `codetyper` instead of `python codetyper.py`.
+This installs positron-codetyper as a command-line tool. After installation, use `positron-codetyper` instead of `python codetyper.py`.
 
 See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
@@ -37,8 +37,8 @@ See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 Use the `init` command to create a template:
 
 ```bash
-codetyper init python -o my_tutorial.py
-# Or for R: codetyper init r -o my_tutorial.R
+positron-codetyper init python -o my_tutorial.py
+# Or for R: positron-codetyper init r -o my_tutorial.R
 ```
 
 Or use one of the examples:
@@ -49,19 +49,19 @@ Or use one of the examples:
 
 **Terminal mode** (types in your terminal):
 ```bash
-codetyper type-code examples/example_script.py
+positron-codetyper type-code examples/example_script.py
 ```
 
 **IDE mode** (types into Positron):
 ```bash
-codetyper type-code examples/example_script.py --ide
+positron-codetyper type-code examples/example_script.py --ide
 ```
 
 ### 3. Record your tutorial
 
 Either use external recording software (QuickTime, OBS, etc.), or enable automatic screen recording with FFmpeg:
 ```bash
-codetyper type-code examples/example_script.py --record
+positron-codetyper type-code examples/example_script.py --record
 ```
 *Note: Automatic recording requires FFmpeg (`brew install homebrew-ffmpeg/ffmpeg/ffmpeg`) and macOS Screen Recording permissions enabled for your terminal.*
 
@@ -70,36 +70,36 @@ codetyper type-code examples/example_script.py --record
 ### Basic command
 
 ```bash
-codetyper type-code <script-file.py>
+positron-codetyper type-code <script-file.py>
 ```
 
 ### With options
 
 ```bash
 # Type into Positron IDE
-codetyper type-code my_script.py --ide
+positron-codetyper type-code my_script.py --ide
 
 # Format output with Ruff (Python) or styler (R)
-codetyper type-code my_script.py --format
+positron-codetyper type-code my_script.py --format
 
 # Combine IDE mode with formatting
-codetyper type-code my_script.py --ide --format
+positron-codetyper type-code my_script.py --ide --format
 
 # Override typing speed (faster)
-codetyper type-code my_script.py --speed 0.02
+positron-codetyper type-code my_script.py --speed 0.02
 
 # Disable code execution (terminal mode only)
-codetyper type-code my_script.py --no-execute
+positron-codetyper type-code my_script.py --no-execute
 
 # Override output file
-codetyper type-code my_script.R -o /path/to/output.R
+positron-codetyper type-code my_script.R -o /path/to/output.R
 
 # Record screen automatically to recording.mp4
-codetyper type-code my_script.py --record
+positron-codetyper type-code my_script.py --record
 
 # Customize recording output and input device index
 # (the screen capture device is auto-detected; only override if needed)
-codetyper type-code my_script.py --record --record-output demo.mp4 --record-device 2
+positron-codetyper type-code my_script.py --record --record-output demo.mp4 --record-device 2
 ```
 
 ### Terminal Mode vs IDE Mode
@@ -274,29 +274,29 @@ Once permissions are granted, CodeTyper can send keystrokes to Positron.
 
 ```bash
 # 1. Create template
-codetyper init r -o r_tutorial.R
+positron-codetyper init r -o r_tutorial.R
 
 # 2. Edit r_tutorial.R with your code
 
 # 3. Test run (no recording)
-codetyper type-code r_tutorial.R
+positron-codetyper type-code r_tutorial.R
 
 # 4. Start QuickTime screen recording
 
 # 5. Run for recording
-codetyper type-code r_tutorial.R
+positron-codetyper type-code r_tutorial.R
 ```
 
 ### Fast Python demo
 
 ```bash
-codetyper type-code examples/example_script.py --speed 0.02
+positron-codetyper type-code examples/example_script.py --speed 0.02
 ```
 
 ### Python script (no execution)
 
 ```bash
-codetyper type-code my_script.py --no-execute
+positron-codetyper type-code my_script.py --no-execute
 ```
 
 ## Troubleshooting
@@ -349,9 +349,9 @@ For multi-file projects, create a shell script that runs multiple CodeTyper comm
 The codebase is modular and organized:
 
 ```
-src/codetyper/
+src/positron_codetyper/
 ├── __init__.py      # Package initialization
-├── __main__.py      # python -m codetyper support
+├── __main__.py      # python -m positron_codetyper support
 ├── app.py           # Main application orchestrator
 ├── cli.py           # Command-line interface
 ├── config.py        # Configuration dataclasses

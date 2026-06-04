@@ -5,10 +5,10 @@ from typing import Optional
 
 import typer
 
-from codetyper.app import CodeTyperApp
-from codetyper.parser import load_config, parse_script_file
-from codetyper.exceptions import ConfigurationError
-from codetyper.templates import TEMPLATES
+from positron_codetyper.app import CodeTyperApp
+from positron_codetyper.parser import load_config, parse_script_file
+from positron_codetyper.exceptions import ConfigurationError
+from positron_codetyper.templates import TEMPLATES
 
 app = typer.Typer(help="CodeTyper - Terminal typewriter for coding tutorials")
 
@@ -30,9 +30,9 @@ def type_code(
     Type code character-by-character for tutorial recording.
 
     Example:
-        codetyper type-code examples/example_script.py
-        codetyper type-code examples/example_script.R --speed 0.03
-        codetyper type-code my_script.py --ide
+        positron-codetyper type-code examples/example_script.py
+        positron-codetyper type-code examples/example_script.R --speed 0.03
+        positron-codetyper type-code my_script.py --ide
     """
     try:
         file_ext = config_file.suffix.lower()
@@ -88,8 +88,8 @@ def init(
     Create a template script file with YAML frontmatter.
 
     Example:
-        codetyper init python
-        codetyper init r -o my_tutorial.R
+        positron-codetyper init python
+        positron-codetyper init r -o my_tutorial.R
     """
     if language not in TEMPLATES:
         typer.secho(
@@ -106,8 +106,8 @@ def init(
     typer.secho(f"✓ Created template: {output}", fg=typer.colors.GREEN)
     typer.secho("\nTo use this template:", fg=typer.colors.CYAN)
     typer.secho(f"  1. Edit {output} with your code", fg=typer.colors.CYAN)
-    typer.secho(f"  2. Run: codetyper type-code {output}", fg=typer.colors.CYAN)
-    typer.secho(f"  3. Or with IDE mode: codetyper type-code {output} --ide", fg=typer.colors.CYAN)
+    typer.secho(f"  2. Run: positron-codetyper type-code {output}", fg=typer.colors.CYAN)
+    typer.secho(f"  3. Or with IDE mode: positron-codetyper type-code {output} --ide", fg=typer.colors.CYAN)
 
 
 def main():

@@ -2,8 +2,8 @@
 
 __version__ = "0.1.0"
 
-from codetyper.config import Config, CodeBlock
-from codetyper.exceptions import CodeTyperError, ConfigurationError, ExecutionError
+from positron_codetyper.config import Config, CodeBlock
+from positron_codetyper.exceptions import CodeTyperError, ConfigurationError, ExecutionError
 
 __all__ = [
     "Config",

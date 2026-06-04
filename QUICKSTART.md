@@ -10,14 +10,14 @@ CodeTyper types code character-by-character with a typewriter effect in your ter
 pip install -e .
 ```
 
-After installation, use the `codetyper` command instead of `python codetyper.py`.
+After installation, use the `positron-codetyper` command instead of `python codetyper.py`.
 
 ## Try it now (1 minute)
 
 ### Option 1: Terminal Mode (type in terminal)
 
 ```bash
-codetyper type-code examples/example_script.py
+positron-codetyper type-code examples/example_script.py
 ```
 
 This will:
@@ -30,12 +30,12 @@ This will:
 
 **Python example:**
 ```bash
-codetyper type-code examples/example_script.py --ide
+positron-codetyper type-code examples/example_script.py --ide
 ```
 
 **R example:**
 ```bash
-codetyper type-code examples/example_script.R --ide
+positron-codetyper type-code examples/example_script.R --ide
 ```
 
 This will:
@@ -56,16 +56,16 @@ System Settings → Privacy & Security → Accessibility and enable permissions 
 
 ```bash
 # Generate a template
-codetyper init python -o my_tutorial.py
-# Or for R: codetyper init r -o my_tutorial.R
+positron-codetyper init python -o my_tutorial.py
+# Or for R: positron-codetyper init r -o my_tutorial.R
 
 # Edit my_tutorial.py with your code (use any text editor)
 
 # Run it in terminal mode
-codetyper type-code my_tutorial.py
+positron-codetyper type-code my_tutorial.py
 
 # Or run it in IDE mode
-codetyper type-code my_tutorial.py --ide
+positron-codetyper type-code my_tutorial.py --ide
 ```
 
 ## Script File Format
@@ -123,25 +123,25 @@ print(df.head())
 
 ```bash
 # Type faster
-codetyper type-code my_script.py --speed 0.02
+positron-codetyper type-code my_script.py --speed 0.02
 
 # Type into Positron IDE
-codetyper type-code my_script.py --ide
+positron-codetyper type-code my_script.py --ide
 
 # Format output with Ruff (Python) or styler (R)
-codetyper type-code my_script.py --format
+positron-codetyper type-code my_script.py --format
 
 # Combine IDE mode with formatting
-codetyper type-code my_script.py --ide --format
+positron-codetyper type-code my_script.py --ide --format
 
 # Don't execute code (just type it) - terminal mode only
-codetyper type-code my_script.py --no-execute
+positron-codetyper type-code my_script.py --no-execute
 
 # Save to different location
-codetyper type-code my_script.R -o /path/to/output.R
+positron-codetyper type-code my_script.R -o /path/to/output.R
 
 # Use different Positron path
-codetyper type-code my_script.py --ide --ide-path /custom/path/to/Positron.app
+positron-codetyper type-code my_script.py --ide --ide-path /custom/path/to/Positron.app
 ```
 
 ## Tips
@@ -182,9 +182,9 @@ See [README.md](README.md) for complete documentation including:
 ## Get Help
 
 ```bash
-codetyper --help
-codetyper type-code --help
-codetyper init --help
+positron-codetyper --help
+positron-codetyper type-code --help
+positron-codetyper init --help
 ```
 
 ## Workflow Example
@@ -193,20 +193,20 @@ Here's a typical workflow for creating a coding tutorial:
 
 1. **Create your script with content:**
    ```bash
-   codetyper init python -o tutorial.py
+   positron-codetyper init python -o tutorial.py
    # Edit tutorial.py - add your code between ## headers
    ```
 
 2. **Test in terminal mode:**
    ```bash
-   codetyper type-code tutorial.py
+   positron-codetyper type-code tutorial.py
    # Verify the code works and timing is good
    ```
 
 3. **Record with IDE mode:**
    ```bash
    # Start screen recording (QuickTime, OBS, etc.)
-   codetyper type-code tutorial.py --ide --output demo.py
+   positron-codetyper type-code tutorial.py --ide --output demo.py
    # tutorial.py = your script with headers (the "script")
    # demo.py = blank file that gets typed into (the "output")
    ```

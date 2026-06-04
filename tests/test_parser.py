@@ -1,5 +1,5 @@
 from pathlib import Path
-from codetyper.parser import parse_script_file
+from positron_codetyper.parser import parse_script_file
 
 def test_example_script_paths():
     # Verify examples/example_script.py resolves output_file to a relative path

@@ -20,31 +20,31 @@ The `-e` flag installs in "editable" mode, which means you can make changes to t
 After installation, you should be able to run:
 
 ```bash
-codetyper --help
+positron-codetyper --help
 ```
 
 ### Usage
 
-Once installed, use the `codetyper` command instead of `python codetyper.py`:
+Once installed, use the `positron-codetyper` command instead of `python codetyper.py`:
 
 ```bash
 # Create a template
-codetyper init python -o my_tutorial.py
+positron-codetyper init python -o my_tutorial.py
 
 # Type code in terminal mode
-codetyper type-code my_tutorial.py
+positron-codetyper type-code my_tutorial.py
 
 # Type code in IDE mode
-codetyper type-code my_tutorial.py --ide
+positron-codetyper type-code my_tutorial.py --ide
 
 # With formatting
-codetyper type-code my_tutorial.py --format
+positron-codetyper type-code my_tutorial.py --format
 ```
 
 ### Uninstall
 
 ```bash
-pip uninstall codetyper
+pip uninstall positron-codetyper
 ```
 
 ## For Developers
@@ -68,9 +68,9 @@ python -m pytest tests/
 ```
 codetyper/
 ├── src/
-│   └── codetyper/
+│   └── positron_codetyper/
 │       ├── __init__.py      # Package initialization
-│       ├── __main__.py      # python -m codetyper support
+│       ├── __main__.py      # python -m positron_codetyper support
 │       ├── app.py           # Main application orchestrator
 │       ├── cli.py           # Command-line interface
 │       ├── config.py        # Configuration dataclasses
@@ -105,5 +105,5 @@ twine upload dist/*
 Then users can install with:
 
 ```bash
-pip install codetyper
+pip install positron-codetyper
 ```
