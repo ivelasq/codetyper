@@ -51,9 +51,9 @@ Users can install from the wheel:
 pip install positron-codetyper-0.1.0-py3-none-any.whl
 ```
 
-## Publishing to PyPI (Future)
+## Publishing to PyPI
 
-When ready to publish publicly:
+The package is published at [positron-codetyper on PyPI](https://pypi.org/project/positron-codetyper/). To publish a new release:
 
 ### 1. Create PyPI Account
 

@@ -17,10 +17,12 @@ Create realistic typing demonstrations for coding tutorials. Types code characte
 ### Quick Install
 
 ```bash
-pip install -e .
+pip install positron-codetyper
 ```
 
 This installs positron-codetyper as a command-line tool. After installation, use `positron-codetyper` instead of `python codetyper.py`.
+
+To install from source for development, clone the repo and run `pip install -e .` instead.
 
 See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 

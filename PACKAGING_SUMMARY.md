@@ -89,17 +89,17 @@ cd codetyper
 pip install -e .
 ```
 
-### 3. PyPI (Future)
+### 3. PyPI
 
-When ready to publish publicly:
+Published at [positron-codetyper](https://pypi.org/project/positron-codetyper/). Anyone can install with:
+```bash
+pip install positron-codetyper
+```
+
+To publish a new release:
 ```bash
 python -m build
 twine upload dist/*
-```
-
-Then anyone can:
-```bash
-pip install positron-codetyper
 ```
 
 See [DISTRIBUTION.md](DISTRIBUTION.md) for details.
@@ -140,7 +140,7 @@ The old files (`codetyper.py` and `config_schema.py`) are still present and func
 2. **Remove old files**: Once confident, delete `codetyper.py` and `config_schema.py`
 3. **Publish to GitHub**: Push to a repository
 4. **Share**: Users can install with `pip install git+https://...`
-5. **Future**: Consider publishing to PyPI for `pip install positron-codetyper`
+5. **Published**: Available on PyPI via `pip install positron-codetyper`
 
 ## Documentation
 

@@ -7,7 +7,7 @@ CodeTyper types code character-by-character with a typewriter effect in your ter
 ## Installation
 
 ```bash
-pip install -e .
+pip install positron-codetyper
 ```
 
 After installation, use the `positron-codetyper` command instead of `python codetyper.py`.

@@ -2,7 +2,17 @@
 
 ## For Users
 
+### Install from PyPI
+
+```bash
+pip install positron-codetyper
+```
+
+This is the recommended way to install for everyday use.
+
 ### Local Installation
+
+To install from source (e.g. for development):
 
 1. Clone or download this repository
 2. Navigate to the codetyper directory
@@ -88,9 +98,9 @@ codetyper/
 └── README.md              # Documentation
 ```
 
-## Distribution (Future)
+## Publishing a New Release
 
-When ready to publish to PyPI:
+To build and publish a new version to PyPI:
 
 ```bash
 # Build the package
@@ -102,8 +112,8 @@ pip install twine
 twine upload dist/*
 ```
 
-Then users can install with:
+Users can then install or upgrade with:
 
 ```bash
-pip install positron-codetyper
+pip install --upgrade positron-codetyper
 ```
