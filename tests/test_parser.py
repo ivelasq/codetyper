@@ -13,5 +13,5 @@ def test_example_script_paths():
 def test_config_recording_defaults():
     config_py = parse_script_file(Path("examples/example_script.py"))
     assert config_py.record is False
-    assert config_py.record_device == "1"
+    assert config_py.record_device is None
     assert config_py.record_output == "recording.mp4"

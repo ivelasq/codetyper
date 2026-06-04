@@ -1,5 +1,6 @@
 """Main application orchestrator."""
 
+import re
 import time
 import subprocess
 
@@ -191,6 +192,36 @@ class CodeTyperApp:
             border_style="green"
         ))
 
+    def _detect_screen_device(self):
+        """Return the avfoundation index of the screen capture device, or None."""
+        try:
+            result = subprocess.run(
+                ["ffmpeg", "-hide_banner", "-f", "avfoundation",
+                 "-list_devices", "true", "-i", ""],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+        except Exception:
+            return None
+
+        # Device list is printed to stderr. Lines look like:
+        #   [AVFoundation indev @ 0x...] [2] Capture screen 0
+        # Only parse the video device section, since audio uses its own indices.
+        in_video_section = False
+        for line in result.stderr.splitlines():
+            if "AVFoundation video devices:" in line:
+                in_video_section = True
+                continue
+            if "AVFoundation audio devices:" in line:
+                in_video_section = False
+                continue
+            if in_video_section and "capture screen" in line.lower():
+                match = re.search(r"\[(\d+)\]", line.split("]", 1)[1])
+                if match:
+                    return match.group(1)
+        return None
+
     def _start_recording(self):
         self.record_process = None
         if not self.config.record:
@@ -210,11 +241,26 @@ class CodeTyperApp:
             ))
             sys.exit(1)
 
+        device = self.config.record_device
+        if device is None:
+            device = self._detect_screen_device()
+            if device is None:
+                self.console.print(Panel(
+                    "[bold red]Could not auto-detect a screen capture device![/bold red]\n\n"
+                    "Run [cyan]ffmpeg -f avfoundation -list_devices true -i \"\"[/cyan] to list devices,\n"
+                    "then pass the screen's index explicitly, e.g. [cyan]--record-device 2[/cyan].\n\n"
+                    "If no [yellow]\"Capture screen\"[/yellow] device is listed, grant your terminal app\n"
+                    "Screen Recording permission in System Settings → Privacy & Security.",
+                    title="Recording Error",
+                    border_style="red"
+                ))
+                sys.exit(1)
+
         cmd = [
             "ffmpeg",
             "-f", "avfoundation",
             "-framerate", "30",
-            "-i", self.config.record_device,
+            "-i", device,
             "-pix_fmt", "yuv420p",
             "-r", "30",
             "-c:v", "h264_videotoolbox",

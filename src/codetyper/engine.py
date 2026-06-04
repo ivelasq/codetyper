@@ -139,43 +139,33 @@ class IDETyper:
         time.sleep(2)
         self.activate_positron()
         time.sleep(1.0)
-        self.minimize_panes()
+        self.enter_zen_mode()
 
     def activate_positron(self):
         """Bring Positron to foreground."""
         applescript = 'tell application "Positron" to activate'
         subprocess.run(["osascript", "-e", applescript], check=True)
 
-    def minimize_panes(self):
-        """Minimize sidebar and terminal panels in Positron."""
+    def enter_zen_mode(self):
+        """Enter Zen mode in Positron to hide all panels and chrome.
+
+        Zen mode is bound to the Cmd+K Z chord (the same as VS Code), which
+        hides the sidebar, panel/terminal, tabs, and status bar in one shot -
+        a cleaner result than toggling each pane individually.
+        """
         time.sleep(0.5)
 
-        # Toggle panel/terminal (Cmd+J)
-        applescript = (
-            'tell application "System Events" to keystroke "j" using command down'
-        )
+        # Send the Cmd+K Z chord: Cmd+K, then release Cmd, then Z.
+        applescript = '''
+tell application "System Events"
+    keystroke "k" using command down
+    delay 0.2
+    keystroke "z"
+end tell
+'''
         subprocess.run(
             ["osascript", "-e", applescript], check=True, capture_output=True
         )
-        time.sleep(0.3)
-
-        # Close primary sidebar/explorer only if it's open
-        applescript = '''
-tell application "System Events"
-    tell process "Positron"
-        try
-            set sidebarVisible to (value of attribute "AXValue" of checkbox "Primary Side Bar" of menu "View" of menu bar 1)
-            if sidebarVisible then
-                keystroke "b" using command down
-            end if
-        on error
-            -- Fallback: just toggle if we can't check state
-            keystroke "b" using command down
-        end try
-    end tell
-end tell
-'''
-        subprocess.run(["osascript", "-e", applescript], check=True, capture_output=True)
         time.sleep(0.5)
 
     def type_keystroke(self, char: str):

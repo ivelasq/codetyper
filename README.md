@@ -98,7 +98,8 @@ codetyper type-code my_script.R -o /path/to/output.R
 codetyper type-code my_script.py --record
 
 # Customize recording output and input device index
-codetyper type-code my_script.py --record --record-output demo.mp4 --record-device 1
+# (the screen capture device is auto-detected; only override if needed)
+codetyper type-code my_script.py --record --record-output demo.mp4 --record-device 2
 ```
 
 ### Terminal Mode vs IDE Mode
