@@ -98,12 +98,12 @@ pip install positron-codetyper
 
 ## Version Management
 
-Update version in `pyproject.toml`:
+The version is defined in a single place — `__version__` in
+`src/positron_codetyper/__init__.py` — and `pyproject.toml` reads it
+dynamically. To bump the version, edit only that one line:
 
-```toml
-[project]
-name = "positron-codetyper"
-version = "0.2.0"  # Update this
+```python
+__version__ = "0.2.0"
 ```
 
 Follow semantic versioning:
@@ -116,41 +116,47 @@ Follow semantic versioning:
 1. Test thoroughly
 2. Update README.md
 3. Update CHANGELOG.md (if you create one)
-4. Update version in pyproject.toml
-5. Create a git tag: `git tag v0.1.0`
-6. Push tag: `git push origin v0.1.0`
+4. Bump `__version__` in `src/positron_codetyper/__init__.py`
+5. Create a git tag: `git tag v0.2.0`
+6. Push tag: `git push origin v0.2.0`
 
 ## Package Metadata
 
-Update `pyproject.toml` before publishing:
+The package metadata lives in `pyproject.toml`. The current configuration:
 
 ```toml
 [project]
 name = "positron-codetyper"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Create realistic typing demonstrations for coding tutorials"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Isabella Velasquez"}
 ]
-keywords = ["tutorial", "typing", "demo", "screen recording", "education"]
+keywords = ["tutorial", "typing", "demo", "screen recording", "education", "positron"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "Intended Audience :: Education",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Multimedia :: Graphics :: Presentation",
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/positron-codetyper"
-Documentation = "https://github.com/yourusername/positron-codetyper#readme"
-Repository = "https://github.com/yourusername/positron-codetyper"
-"Bug Tracker" = "https://github.com/yourusername/positron-codetyper/issues"
+Homepage = "https://github.com/ivelasq/positron-codetyper"
+Repository = "https://github.com/ivelasq/positron-codetyper"
+"Bug Tracker" = "https://github.com/ivelasq/positron-codetyper/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "positron_codetyper.__version__"}
 ```

@@ -4,13 +4,29 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "positron-codetyper"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Create realistic typing demonstrations for coding tutorials"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Isabella Velasquez"}
+]
+keywords = ["tutorial", "typing", "demo", "screen recording", "education", "positron"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Multimedia :: Graphics :: Presentation",
 ]
 dependencies = [
     "rich>=13.0.0",
@@ -23,6 +39,11 @@ positron-codetyper = "positron_codetyper.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/ivelasq/positron-codetyper"
+Repository = "https://github.com/ivelasq/positron-codetyper"
+"Bug Tracker" = "https://github.com/ivelasq/positron-codetyper/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "positron_codetyper.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
