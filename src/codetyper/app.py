@@ -213,6 +213,7 @@ class CodeTyperApp:
         cmd = [
             "ffmpeg",
             "-f", "avfoundation",
+            "-framerate", "30",
             "-i", self.config.record_device,
             "-pix_fmt", "yuv420p",
             "-r", "30",
